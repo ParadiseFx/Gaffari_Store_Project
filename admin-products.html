@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Gaffari Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Light Theme (Admin) */
+            --light-primary: #f8f9fa;
+            --light-secondary: #ffffff;
+            --light-accent: #495057;
+            --light-text: #212529;
+            --light-border: #dee2e6;
+            --light-btn: #495057;
+            --light-btn-hover: #343a40;
+            --light-success: #28a745;
+            --light-warning: #ffc107;
+            --light-danger: #dc3545;
+            --light-info: #17a2b8;
+            
+            /* Dark Theme (Admin) */
+            --dark-primary: #121212;
+            --dark-secondary: #1e1e1e;
+            --dark-accent: #adb5bd;
+            --dark-text: #e9ecef;
+            --dark-border: #343a40;
+            --dark-btn: #adb5bd;
+            --dark-btn-hover: #f8f9fa;
+            --dark-success: #4caf50;
+            --dark-warning: #ffab00;
+            --dark-danger: #ff6b6b;
+            --dark-info: #00bcd4;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--light-primary);
+            --bg-secondary: var(--light-secondary);
+            --bg-accent: var(--light-accent);
+            --text-primary: var(--light-text);
+            --border-color: var(--light-border);
+            --btn-bg: var(--light-btn);
+            --btn-hover: var(--light-btn-hover);
+            --success-color: var(--light-success);
+            --warning-color: var(--light-warning);
+            --danger-color: var(--light-danger);
+            --info-color: var(--light-info);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: var(--dark-primary);
+            --bg-secondary: var(--dark-secondary);
+            --bg-accent: var(--dark-accent);
+            --text-primary: var(--dark-text);
+            --border-color: var(--dark-border);
+            --btn-bg: var(--dark-btn);
+            --btn-hover: var(--dark-btn-hover);
+            --success-color: var(--dark-success);
+            --warning-color: var(--dark-warning);
+            --danger-color: var(--dark-danger);
+            --info-color: var(--dark-info);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background-color: var(--bg-secondary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .brand-logo img {
+            height: 40px;
+            border-radius: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--btn-bg);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--btn-bg);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .theme-switcher {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--danger-color);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .logout-btn:hover {
+            color: var(--btn-hover);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .admin-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+        }
+
+        /* Product Form */
+        .product-form {
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--btn-bg);
+            box-shadow: 0 0 0 2px rgba(73, 80, 87, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--btn-bg);
+            color: var(--bg-secondary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--btn-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--btn-bg);
+            color: var(--btn-bg);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--btn-bg);
+            color: var(--bg-secondary);
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Products Table */
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+        }
+
+        .products-table th, 
+        .products-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .products-table th {
+            background-color: var(--bg-accent);
+            color: var(--bg-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .products-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .products-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .product-image-cell {
+            width: 80px;
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            background-color: #ededed;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .status-active {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-draft {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+
+        .status-archived {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+            transition: color 0.3s;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .action-btn.view {
+            color: var(--info-color);
+        }
+
+        .action-btn.edit {
+            color: var(--warning-color);
+        }
+
+        .action-btn.delete {
+            color: var(--danger-color);
+        }
+
+        .action-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Search and Filter */
+        .admin-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--btn-bg);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-primary);
+            opacity: 0.7;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .filter-group select {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .footer-slogan {
+            display: block;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            color: var(--btn-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .products-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .admin-toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-box {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-table th, 
+            .products-table td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.85rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="brand-logo">
+                    <img src="assets/images/logo4.jpeg" alt="Gaffari Logo">
+                    <span>Gaffari Admin</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="admin-orders.html" class="nav-link">Orders</a></li>
+                    <li><a href="admin-products.html" class="nav-link active">Products</a></li>
+                    <li><button class="logout-btn">Logout</button></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="theme-switcher" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="admin-section">
+                <div class="section-header">
+                    <h1 class="section-title">Product Management</h1>
+                    <button id="add-product-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Product
+                    </button>
+                </div>
+                <div class="admin-toolbar">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="product-search" placeholder="Search products...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="category-filter">Category:</label>
+                        <select id="category-filter">
+                            <option value="all">All Categories</option>
+                            <option value="T-Shirts">T-Shirts</option>
+                            <option value="Pants">Pants</option>
+                            <option value="Tracksuits">Tracksuits</option>
+                            <option value="Jerseys">Jerseys</option>
+                            <option value="Hoodies">Hoodies</option>
+                            <option value="Sets">Sets</option>
+                        </select>
+                        <label for="status-filter">Status:</label>
+                        <select id="status-filter">
+                            <option value="all">All Statuses</option>
+                            <option value="active">Active</option>
+                            <option value="draft">Draft</option>
+                            <option value="archived">Archived</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th class="product-image-cell">Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-list">
+                            <!-- Products will be rendered here by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- Add/Edit Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Add New Product</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <form id="product-form" class="product-form">
+                <input type="hidden" id="product-id">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="product-name">Product Name</label>
+                        <input type="text" id="product-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-category">Category</label>
+                        <select id="product-category" class="form-control" required>
+                            <option value="">Select Category</option>
+                            <option value="T-Shirts">T-Shirts</option>
+                            <option value="Pants">Pants</option>
+                            <option value="Tracksuits">Tracksuits</option>
+                            <option value="Jerseys">Jerseys</option>
+                            <option value="Hoodies">Hoodies</option>
+                            <option value="Sets">Sets</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price">Price (R)</label>
+                        <input type="number" id="product-price" class="form-control" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-stock">Stock Quantity</label>
+                        <input type="number" id="product-stock" class="form-control" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-status">Status</label>
+                        <select id="product-status" class="form-control" required>
+                            <option value="active">Active</option>
+                            <option value="draft">Draft</option>
+                            <option value="archived">Archived</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image">Image URL</label>
+                        <input type="text" id="product-image" class="form-control" placeholder="https://example.com/image.jpg">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description</label>
+                    <textarea id="product-description" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancel-btn" class="btn btn-outline">Cancel</button>
+                    <button type="submit" id="submit-btn" class="btn btn-primary">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <span>&copy; 2025 Gaffari Group. All rights reserved.</span>
+                <span class="footer-slogan">Empowering Your Style.</span>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const savedTheme = localStorage.getItem('theme') || 
+                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            if (newTheme === 'dark') {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // Logout button
+        document.querySelector('.logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('jwt');
+            localStorage.removeItem('is_admin');
+            localStorage.removeItem('user_name');
+            localStorage.removeItem('user_email');
+            window.location.href = 'login.html';
+        });
+
+        // Admin check
+        if (localStorage.getItem('is_admin') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('product-modal');
+        const addProductBtn = document.getElementById('add-product-btn');
+        const modalClose = document.getElementById('modal-close');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const modalTitle = document.getElementById('modal-title');
+        const productForm = document.getElementById('product-form');
+
+        addProductBtn.addEventListener('click', () => {
+            modalTitle.textContent = 'Add New Product';
+            productForm.reset();
+            document.getElementById('product-id').value = '';
+            modal.style.display = 'flex';
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+        modalClose.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Fetch and render products dynamically
+        async function fetchAndRenderProducts() {
+            const tbody = document.getElementById('products-list');
+            tbody.innerHTML = '<tr><td colspan="7">Loading...</td></tr>';
+            try {
+                const res = await fetch('/api/products', {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+                    }
+                });
+                const products = await res.json();
+                if (!Array.isArray(products) || products.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7">No products found.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = '';
+                products.forEach(product => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><img src="${product.image_url}" alt="Product" class="product-image"></td>
+                            <td>${product.name}</td>
+                            <td>${product.category}</td>
+                            <td>R${product.price.toFixed(2)}</td>
+                            <td>${product.stock_quantity}</td>
+                            <td><span class="status-badge status-${product.status || 'active'}">${product.status || 'active'}</span></td>
+                            <td>
+                                <button class="action-btn view" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete" title="Delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                tbody.innerHTML = '<tr><td colspan="7">Failed to load products.</td></tr>';
+            }
+        }
+        fetchAndRenderProducts();
+
+        // Search functionality
+        document.getElementById('product-search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#products-list tr');
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        // Filter functionality
+        document.getElementById('category-filter').addEventListener('change', filterProducts);
+        document.getElementById('status-filter').addEventListener('change', filterProducts);
+
+        function filterProducts() {
+            const category = document.getElementById('category-filter').value;
+            const status = document.getElementById('status-filter').value;
+            const rows = document.querySelectorAll('#products-list tr');
+            rows.forEach(row => {
+                const rowCategory = row.cells[2].textContent;
+                const rowStatus = row.cells[5].querySelector('.status-badge').textContent;
+                const categoryMatch = category === 'all' || rowCategory === category;
+                const statusMatch = status === 'all' || rowStatus === status;
+                row.style.display = categoryMatch && statusMatch ? '' : 'none';
+            });
+        }
+
+        // Form submission (sample, should POST/PUT to backend in real app)
+        productForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Collect form data and send to backend here
+            closeModal();
+            alert('Product saved (demo only).');
+        });
+    </script>
+</body>
+</html>

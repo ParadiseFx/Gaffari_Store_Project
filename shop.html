@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop | Gaffari Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+
+    .size-selector {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0.6rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23333' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+.size-selector:focus {
+  border-color: var(--btn-bg);
+  box-shadow: 0 0 0 2px rgba(100, 100, 255, 0.2);
+}
+
+.size-selector option {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+
+
+
+    :root {
+      --light-bg: #f9f9f9;
+      --light-card: #ffffff;
+      --light-text: #212529;
+      --light-border: #ced4da;
+      --light-btn: #343a40;
+      --light-btn-hover: #212529;
+
+      --dark-bg: #121212;
+      --dark-card: #1e1e1e;
+      --dark-text: #f1f1f1;
+      --dark-border: #444;
+      --dark-btn: #f1f1f1;
+      --dark-btn-hover: #fff;
+
+      --radius: 8px;
+    }
+
+    [data-theme="light"] {
+      --bg: var(--light-bg);
+      --card: var(--light-card);
+      --text: var(--light-text);
+      --border: var(--light-border);
+      --btn-bg: var(--light-btn);
+      --btn-hover: var(--light-btn-hover);
+      --btn-text: #fff;
+    }
+
+    [data-theme="dark"] {
+      --bg: var(--dark-bg);
+      --card: var(--dark-card);
+      --text: var(--dark-text);
+      --border: var(--dark-border);
+      --btn-bg: var(--dark-btn);
+      --btn-hover: var(--dark-btn-hover);
+      --btn-text: #000;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header.header {
+      background-color: var(--card);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .brand-logo img {
+      height: 40px;
+      border-radius: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      color: #888;
+    }
+
+    .theme-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 1.2rem;
+    }
+
+    .hero-section {
+      text-align: center;
+      padding: 3rem 1rem;
+      background-color: var(--card);
+    }
+
+    .hero-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-section p {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    main.container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+
+
+.product-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    font-weight: 600;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+    .shop-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      gap: 1rem;
+    }
+
+    .shop-controls input,
+    .shop-controls select {
+      padding: 0.7rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      width: 100%;
+            height: 100%;
+            object-fit: cover;
+    max-height: 300px;
+    object-fit: contain;
+    background-color: var(--bg-accent); /* optional: adds contrast if image doesn't fill space */
+    padding: 10px; /* optional: gives breathing room inside the card */
+        }
+    
+
+    .product-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--btn-hover);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--btn-bg);
+      border: 1px solid var(--btn-bg);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+    }
+
+    footer.footer {
+      background-color: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 2rem 1rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .footer-slogan {
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+    
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .shop-controls {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+.size-selector,
+.size-selector option {
+  background-color: #bfaeae !important;
+  color: #222 !important;
+}
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="brand-logo">
+        <img src="assets/images/logo4.jpeg" alt="Gaffari Logo">
+        <span>Gaffari</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="shop.html" class="nav-link active">Shop</a></li>
+        <li><a href="wishlist.html" class="nav-link">Wishlist</a></li>
+        <li><a href="cart.html" class="nav-link">Cart</a></li>
+        <li><a href="profile.html" class="nav-link">Profile</a></li>
+        <li><a href="orders.html" class="nav-link">My Orders</a></li>
+        <li>
+          <button class="theme-icon" onclick="toggleTheme()" title="Switch Theme">🌓</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero-section">
+    <h1>Shop Styles That Speak Before You Do.</h1>
+    <p>Browse our curated collection of timeless pieces.</p>
+  </section>
+
+  <main class="container">
+    <div class="shop-controls">
+      <input type="text" id="product-search" placeholder="Search products...">
+      <select id="category-filter">
+        <option value="">All Categories</option>
+        <option value="T-Shirts">T-Shirts</option>
+        <option value="Pants">Pants</option>
+        <option value="Tracksuits">Tracksuits</option>
+        <option value="Jerseys">Jerseys</option>
+      </select>
+    </div>
+
+    <div id="shop-product-list" class="products-grid">
+  <div class="product-card" data-category="T-Shirts">
+    <img src="assets/images/tshirt1-1.jpeg" 
+    data-back="assets/images/tshirt1-2.jpeg" 
+    alt="Black Urban Classic Tee" 
+    class="product-img swap-on-hover">
+    <div class="product-info">
+      <h3 class="product-title">Gaffari Black Urban Classic Tee</h3>
+      <p class="product-price">R749.99</p>
+      <select class="size-selector">
+        <option value="">Select Size</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+      <div class="product-actions">
+        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-outline">View Details</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="T-Shirts">
+    <img src="assets/images/tshirt3-1.jpeg" 
+    data-back="assets/images/tshirt3-2.jpeg" 
+    alt="White Urban Classic Tee" 
+    class="product-img swap-on-hover">
+    <div class="product-info">
+      <h3 class="product-title">Gaffari White Urban Classic Tee</h3>
+      <p class="product-price">R749.99</p>
+      <select class="size-selector">
+        <option value="">Select Size</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+      <div class="product-actions">
+        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-outline">View Details</button>
+      </div>
+    </div>
+  </div>
+  <!-- Repeat for each product -->
+  <div class="product-card" data-category="T-Shirts">
+    <img src="assets/images/tshirt2-1.jpeg" 
+    data-back="assets/images/tshirt2-2.jpeg" 
+    alt="Vintage Wash Tee" 
+    class="product-img swap-on-hover">
+    <div class="product-info">
+      <h3 class="product-title">Gaffari Vintage Wash Tee</h3>
+      <p class="product-price">R999.99</p>
+      <select class="size-selector">
+        <option value="">Select Size</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+      <div class="product-actions">
+        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-outline">View Details</button>
+      </div>
+    </div>
+  </div>
+  <!-- Add more product-card blocks as needed -->
+   <div class="product-card" data-category="T-Shirts">
+    <img src="assets/images/tshirt4-1.jpeg" 
+    data-back="assets/images/tshirt4-2.jpeg" 
+    alt="Black Graphic Tee" 
+    class="product-img swap-on-hover">
+    <div class="product-info">
+      <h3 class="product-title">Gaffari White Graphic Tee</h3>
+      <p class="product-price">R999.99</p>
+      <select class="size-selector">
+        <option value="">Select Size</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+      <div class="product-actions">
+        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-outline">View Details</button>
+      </div>
+    </div>
+  </div>
+   <!-- Add more products as needed -->
+        <div class="product-card" data-category="Jerseys">
+              <img 
+                  src="assets/images/hoodie1.jpg" 
+                  data-back="assets/images/hoodie2.jpg" 
+                  alt="Essential Hoodies" 
+                  class="product-img swap-on-hover">
+              <div class="product-info">
+                  <h3 class="product-title">Gaffari Essential Hoodies</h3>
+                  <p class="product-price">R899.99</p>
+          <select class="size-selector">
+          <option value="">Select Size</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          </select>
+        <div class="product-actions">
+          <button class="btn btn-primary">Add to Cart</button>
+          <button class="btn btn-outline">View Details</button>
+        </div>
+      </div>
+    </div>
+   <!-- Repeat for each product -->
+  <div class="product-card" data-category="T-Shirts">
+    <img 
+                src="assets/images/tshirt5-1.jpeg" 
+                data-back="assets/images/tshirt5-2.jpeg" 
+                alt="Black Graphic Tee" 
+                class="product-img swap-on-hover">
+            <div class="product-info">
+                <h3 class="product-title">Gaffari Black Graphic Tee</h3>
+                <p class="product-price">R1299.99</p>
+      <select class="size-selector">
+        <option value="">Select Size</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+      <div class="product-actions">
+        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-outline">View Details</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card" data-category="Tracksuits">
+              <img 
+                src="assets/images/combo2.jpeg" 
+                data-back="assets/images/combo1.jpeg" 
+                alt="Essential Set" 
+                class="product-img swap-on-hover">
+            <div class="product-info">
+                <h3 class="product-title">Gaffari Essential Set</h3>
+                <p class="product-price">R1499.99</p>
+      <select class="size-selector">
+        <option value="">Select Size</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+      </select>
+      <div class="product-actions">
+        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-outline">View Details</button>
+      </div>
+    </div>
+  </div>
+
+      <!-- Add more products as needed -->
+       
+
+      <!-- Add more products as needed -->
+  </main>
+
+  <footer class="footer">
+    <div>
+      <span>&copy; 2025 Gaffari Group. All rights reserved.</span><br>
+      <span class="footer-slogan">Empowering Your Style.</span>
+    </div>
+  </footer>
+
+  <div id="toast" style="
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #222;
+    color: #ada0a0;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 9999;
+  ">
+    Item added to cart!
+  </div>
+
+  <script>
+    // Theme toggle
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    // Product filtering
+    function filterProducts() {
+      const query = document.getElementById('product-search').value.toLowerCase();
+      const selected = document.getElementById('category-filter').value;
+      document.querySelectorAll('.product-card').forEach(card => {
+        const title = card.querySelector('.product-title').textContent.toLowerCase();
+        const cardCategory = card.getAttribute('data-category');
+        const matchesSearch = title.includes(query);
+        const matchesCategory = !selected || cardCategory === selected;
+        card.style.display = matchesSearch && matchesCategory ? 'block' : 'none';
+      });
+    }
+    document.getElementById('product-search').addEventListener('input', filterProducts);
+    document.getElementById('category-filter').addEventListener('change', filterProducts);
+
+    // Swap image on hover/touch
+    document.querySelectorAll('.swap-on-hover').forEach(img => {
+      const front = img.src;
+      const back = img.getAttribute('data-back');
+      if (!back) return;
+      img.addEventListener('mouseenter', () => { img.src = back; });
+      img.addEventListener('mouseleave', () => { img.src = front; });
+      let swapped = false;
+      img.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        img.src = swapped ? front : back;
+        swapped = !swapped;
+      });
+    });
+
+    // Toast notification
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.style.opacity = 1;
+      toast.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        toast.style.opacity = 0;
+        toast.style.pointerEvents = 'none';
+      }, 1800);
+    }
+
+    // Add to Cart functionality
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = btn.closest('.product-card');
+        const name = card.querySelector('.product-title').textContent;
+        const price = parseFloat(card.querySelector('.product-price').textContent.replace(/[^\d.]/g, ''));
+        const image_url = card.querySelector('.product-img').getAttribute('src');
+        const sizeSelector = card.querySelector('.size-selector');
+        const size = sizeSelector ? sizeSelector.value : '';
+        if (sizeSelector && !size) {
+          showToast('Please select a size.');
+          return;
+        }
+        // Use name+size as key for uniqueness
+        const key = name + (size ? '-' + size : '');
+        let cart = JSON.parse(localStorage.getItem('cart')) || {};
+        if (!cart[key]) {
+          cart[key] = {
+            name,
+            price,
+            quantity: 1,
+            image_url,
+            options: size ? `Size: ${size}` : ''
+          };
+        } else {
+          cart[key].quantity += 1;
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast('Item added to cart!');
+      });
+    });
+
+    // View Details button (redirect to product.html, can be improved for dynamic product pages)
+    document.querySelectorAll('.view-details-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        window.location.href = 'product.html';
+      });
+    });
+  </script>
+</body>
+</html>

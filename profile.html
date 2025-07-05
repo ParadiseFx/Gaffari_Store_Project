@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile | Gaffari Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --light-bg: #f9f9f9;
+      --light-card: #ffffff;
+      --light-text: #212529;
+      --light-border: #ced4da;
+      --light-btn: #343a40;
+      --light-btn-hover: #212529;
+
+      --dark-bg: #121212;
+      --dark-card: #1e1e1e;
+      --dark-text: #f1f1f1;
+      --dark-border: #444;
+      --dark-btn: #f1f1f1;
+      --dark-btn-hover: #fff;
+
+      --radius: 8px;
+    }
+
+    [data-theme="light"] {
+      --bg: var(--light-bg);
+      --card: var(--light-card);
+      --text: var(--light-text);
+      --border: var(--light-border);
+      --btn-bg: var(--light-btn);
+      --btn-hover: var(--light-btn-hover);
+      --btn-text: #fff;
+    }
+
+    [data-theme="dark"] {
+      --bg: var(--dark-bg);
+      --card: var(--dark-card);
+      --text: var(--dark-text);
+      --border: var(--dark-border);
+      --btn-bg: var(--dark-btn);
+      --btn-hover: var(--dark-btn-hover);
+      --btn-text: #000;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header.header {
+      background-color: var(--card);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .brand-logo img {
+      height: 40px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      color: #888;
+    }
+
+    .theme-icon {
+      cursor: pointer;
+      font-size: 1.2rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      transition: color 0.3s;
+    }
+
+    main {
+      padding: 3rem 1rem;
+    }
+
+    .profile-section {
+      max-width: 600px;
+      margin: auto;
+      background-color: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .profile-section h1,
+    .profile-section h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background-color: transparent;
+      color: var(--text);
+    }
+
+    input:focus {
+      border-color: var(--btn-bg);
+      outline: none;
+    }
+
+    .cta-btn {
+      padding: 0.9rem;
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-bottom: 1rem;
+    }
+
+    .cta-btn:hover {
+      background-color: var(--btn-hover);
+    }
+
+    #address-list {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      min-height: 60px;
+      background-color: var(--bg);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 2rem 1rem;
+      background-color: var(--card);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-slogan {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="brand-logo">
+        <img src="assets/images/logo4.jpeg" alt="Gaffari Logo">
+        <span>Gaffari</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="shop.html" class="nav-link">Shop</a></li>
+        <li><a href="wishlist.html" class="nav-link">Wishlist</a></li>
+        <li><a href="cart.html" class="nav-link">Cart</a></li>
+        <li><a href="profile.html" class="nav-link active" id="profileNav">Profile</a></li>
+        <li><a href="orders.html" class="nav-link" id="ordersNav">My Orders</a></li>
+        <li><a href="login.html" class="nav-link" id="loginNav">Login</a></li>
+        <li><a href="#" class="nav-link" id="logoutNav" style="display:none">Logout</a></li>
+        <li>
+          <button class="theme-icon" onclick="toggleTheme()" title="Switch Theme">🌓</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="profile-section">
+      <h1>Profile</h1>
+      <form id="profile-form" class="profile-form">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" id="profileName" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" id="profileEmail" required disabled>
+        </div>
+        <button type="submit" class="cta-btn">Save Changes</button>
+        <div id="profile-feedback" style="color: red; text-align: center; margin-top: 0.5rem;"></div>
+      </form>
+
+      <h2>Addresses</h2>
+      <div id="address-list"></div>
+      <button id="add-address" class="cta-btn">Add Address</button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <span>&copy; 2025 Gaffari Group. All rights reserved.</span>
+      <span class="footer-slogan">Empowering Your Style.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Theme handling
+    const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    // Show/hide nav links based on login status
+    function updateNavLinks() {
+      const jwt = localStorage.getItem('jwt');
+      const isAdmin = localStorage.getItem('is_admin') === 'true';
+      document.getElementById('profileNav').style.display = jwt ? '' : 'none';
+      document.getElementById('ordersNav').style.display = jwt && !isAdmin ? '' : 'none';
+      document.getElementById('loginNav').style.display = jwt ? 'none' : '';
+      document.getElementById('logoutNav').style.display = jwt ? '' : 'none';
+    }
+    updateNavLinks();
+
+    // Logout functionality
+    document.getElementById('logoutNav').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('is_admin');
+      localStorage.removeItem('user_name');
+      localStorage.removeItem('user_email');
+      window.location.href = 'login.html';
+    });
+  </script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

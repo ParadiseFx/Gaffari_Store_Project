@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Gaffari Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      /* Light Theme (Monochrome Luxe) */
+      --light-primary: #f8f9fa;
+      --light-secondary: #ffffff;
+      --light-accent: #e9ecef;
+      --light-text: #212529;
+      --light-border: #dee2e6;
+      --light-btn: #495057;
+      --light-btn-hover: #343a40;
+      --light-error: #dc3545;
+      
+      /* Dark Theme (Deep & Moody) */
+      --dark-primary: #121212;
+      --dark-secondary: #1e1e1e;
+      --dark-accent: #2d2d2d;
+      --dark-text: #e9ecef;
+      --dark-border: #343a40;
+      --dark-btn: #adb5bd;
+      --dark-btn-hover: #f8f9fa;
+      --dark-error: #ff6b6b;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: var(--light-primary);
+      --bg-secondary: var(--light-secondary);
+      --bg-accent: var(--light-accent);
+      --text-primary: var(--light-text);
+      --border-color: var(--light-border);
+      --btn-bg: var(--light-btn);
+      --btn-hover: var(--light-btn-hover);
+      --error-color: var(--light-error);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: var(--dark-primary);
+      --bg-secondary: var(--dark-secondary);
+      --bg-accent: var(--dark-accent);
+      --text-primary: var(--dark-text);
+      --border-color: var(--dark-border);
+      --btn-bg: var(--dark-btn);
+      --btn-hover: var(--dark-btn-hover);
+      --error-color: var(--dark-error);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s, color 0.3s;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+    }
+
+    .auth-container {
+      background-color: var(--bg-secondary);
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 450px;
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .theme-switcher {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .auth-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .auth-header p {
+      color: #888;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      padding: 12px 15px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--btn-bg);
+      box-shadow: 0 0 0 2px rgba(73, 80, 87, 0.2);
+    }
+
+    .btn {
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--btn-hover);
+      transform: translateY(-2px);
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #888;
+    }
+
+    .auth-footer a {
+      color: var(--btn-bg);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .password-toggle {
+      position: relative;
+    }
+
+    .password-toggle-icon {
+      position: absolute;
+      top: 70%;
+      right: 15px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #888;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 576px) {
+      .auth-container {
+        padding: 1.5rem;
+      }
+      
+      .auth-header h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <button class="theme-switcher" id="themeToggle">
+      <i class="fas fa-moon"></i>
+    </button>
+    <div class="auth-header">
+      <h1>Welcome Back</h1>
+      <p>Sign in to access your account</p>
+    </div>
+    <form id="login-form" class="auth-form">
+      <div class="form-group">
+        <label for="login-email">Email Address</label>
+        <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group password-toggle">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+        <i class="fas fa-eye password-toggle-icon" id="togglePassword"></i>
+      </div>
+      <button type="submit" class="btn btn-primary">Sign In</button>
+      <div id="login-error" class="error-message"></div>
+    </form>
+    <div class="auth-footer">
+      <p>Don't have an account? <a href="register.html">Create one</a></p>
+    </div>
+  </div>
+  <script>
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const savedTheme = localStorage.getItem('theme') || 
+                     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      if (newTheme === 'dark') {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+      } else {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+      }
+    });
+
+    // Password toggle functionality
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('login-password');
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePassword.classList.toggle('fa-eye-slash');
+    });
+
+    // Real login handler
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const errorElement = document.getElementById('login-error');
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      errorElement.textContent = '';
+      if (!email || !password) {
+        errorElement.textContent = 'Please fill in all fields';
+        return;
+      }
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({email, password}),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.msg || 'Login failed');
+        localStorage.setItem('jwt', data.token);
+        localStorage.setItem('is_admin', data.is_admin);
+        localStorage.setItem('user_name', data.name);
+        localStorage.setItem('user_email', data.email);
+        if (data.is_admin) {
+          window.location.href = 'admin-products.html';
+        } else {
+          window.location.href = 'shop.html';
+        }
+      } catch (err) {
+        errorElement.textContent = err.message;
+      }
+    });
+  </script>
+</body>
+</html>

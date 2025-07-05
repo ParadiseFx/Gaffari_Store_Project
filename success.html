@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Success | Gaffari Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Light Theme */
+      --light-primary: #f8f9fa;
+      --light-secondary: #ffffff;
+      --light-accent: #e9ecef;
+      --light-text: #212529;
+      --light-border: #dee2e6;
+      --light-btn: #495057;
+      --light-btn-hover: #343a40;
+
+      /* Dark Theme */
+      --dark-primary: #121212;
+      --dark-secondary: #1e1e1e;
+      --dark-accent: #2d2d2d;
+      --dark-text: #e9ecef;
+      --dark-border: #343a40;
+      --dark-btn: #adb5bd;
+      --dark-btn-hover: #f8f9fa;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: var(--light-primary);
+      --bg-secondary: var(--light-secondary);
+      --bg-accent: var(--light-accent);
+      --text-primary: var(--light-text);
+      --border-color: var(--light-border);
+      --btn-bg: var(--light-btn);
+      --btn-hover: var(--light-btn-hover);
+      --btn-text: var(--light-secondary);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: var(--dark-primary);
+      --bg-secondary: var(--dark-secondary);
+      --bg-accent: var(--dark-accent);
+      --text-primary: var(--dark-text);
+      --border-color: var(--dark-border);
+      --btn-bg: var(--dark-btn);
+      --btn-hover: var(--dark-btn-hover);
+      --btn-text: var(--dark-primary);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s, color 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 6rem 1rem 2rem;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      opacity: 0.85;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .cta-btn:hover {
+      background-color: var(--btn-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-content {
+      margin-top: 3rem;
+      color: var(--text-primary);
+      opacity: 0.7;
+      font-size: 0.95rem;
+    }
+    .footer-slogan {
+      display: block;
+      margin-top: 0.3rem;
+      font-style: italic;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Thank You!</h1>
+    <p>Your payment was successful and your order is being processed.</p>
+    <a href="shop.html" class="cta-btn">Continue Shopping</a>
+    <div class="footer-content">
+      <span>&copy; 2025 Gaffari Group. All rights reserved.</span>
+      <span class="footer-slogan">Empowering Your Style.</span>
+    </div>
+  </main>
+
+  <script>
+    // Theme toggle script (optional but expected from theme-switcher.js)
+    const savedTheme = localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+</body>
+</html>

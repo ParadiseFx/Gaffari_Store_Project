@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details | Gaffari Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+
+        .size-selector {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0.6rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23333' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+.size-selector:focus {
+  border-color: var(--btn-bg);
+  box-shadow: 0 0 0 2px rgba(100, 100, 255, 0.2);
+}
+
+.size-selector option {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+
+
+        /* Same root/theme styling from index.html */
+        :root {
+            --light-primary: #f8f9fa;
+            --light-secondary: #ffffff;
+            --light-accent: #e9ecef;
+            --light-text: #212529;
+            --light-border: #dee2e6;
+            --light-btn: #495057;
+            --light-btn-hover: #343a40;
+
+            --dark-primary: #121212;
+            --dark-secondary: #1e1e1e;
+            --dark-accent: #2d2d2d;
+            --dark-text: #e9ecef;
+            --dark-border: #343a40;
+            --dark-btn: #adb5bd;
+            --dark-btn-hover: #f8f9fa;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--light-primary);
+            --bg-secondary: var(--light-secondary);
+            --bg-accent: var(--light-accent);
+            --text-primary: var(--light-text);
+            --border-color: var(--light-border);
+            --btn-bg: var(--light-btn);
+            --btn-hover: var(--light-btn-hover);
+            --btn-text: var(--light-secondary);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: var(--dark-primary);
+            --bg-secondary: var(--dark-secondary);
+            --bg-accent: var(--dark-accent);
+            --text-primary: var(--dark-text);
+            --border-color: var(--dark-border);
+            --btn-bg: var(--dark-btn);
+            --btn-hover: var(--dark-btn-hover);
+            --btn-text: var(--dark-primary);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header.header {
+            background-color: var(--bg-secondary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .brand-logo img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #888;
+        }
+
+        .product-details-section {
+            padding: 4rem 1rem;
+            background-color: var(--bg-primary);
+        }
+
+        .product-details-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: auto;
+            background-color: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #888;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--btn-hover);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-slogan {
+            display: block;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .product-details-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="brand-logo">
+                    <img src="assets/images/logo4.jpeg" alt="Gaffari Logo">
+                    <span>Gaffari</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="wishlist.html" class="nav-link">Wishlist</a></li>
+                    <li><a href="cart.html" class="nav-link">Cart</a></li>
+                    <li><a href="profile.html" class="nav-link" id="profileNav" style="display:none">Profile</a></li>
+                    <li><a href="orders.html" class="nav-link" id="ordersNav" style="display:none">My Orders</a></li>
+                    <li><a href="login.html" class="nav-link" id="loginNav">Login</a></li>
+                    <li><a href="#" class="nav-link" id="logoutNav" style="display:none">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="product-details-section">
+            <div class="product-details-container" id="product-details-container">
+                <!-- JS will populate this dynamically. Fallback static content below: -->
+                <img 
+                    src="assets/images/tshirt1-1.jpeg" 
+                    data-back="assets/images/tshirt1-2.jpeg" 
+                    alt="Urban Classic Tee" 
+                    class="product-img swap-on-hover">
+                <div class="product-info">
+                    <h3 class="product-title">Gaffari Urban Classic Tee</h3>
+                    <p class="product-price">R749.99</p>
+                    <select class="size-selector">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <button class="cta-btn" id="addToCartBtn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <span>&copy; 2025 Gaffari Group. All rights reserved.</span>
+                <span class="footer-slogan">Empowering Your Style.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    <script>
+        // Swap image on hover/touch
+        document.querySelectorAll('.swap-on-hover').forEach(img => {
+            const front = img.src;
+            const back = img.getAttribute('data-back');
+            if (!back) return;
+            img.addEventListener('mouseenter', () => { img.src = back; });
+            img.addEventListener('mouseleave', () => { img.src = front; });
+            let swapped = false;
+            img.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                img.src = swapped ? front : back;
+                swapped = !swapped;
+            });
+        });
+
+        // Add to Cart functionality
+        document.getElementById('addToCartBtn').addEventListener('click', function() {
+            // Example: get product info (in real use, get from JS-populated data)
+            const productName = document.querySelector('.product-title').textContent;
+            const size = document.querySelector('.size-selector').value;
+            if (!size) {
+                alert('Please select a size.');
+                return;
+            }
+            // Example: Use product ID from URL or JS variable in real app
+            let cart = JSON.parse(localStorage.getItem('cart')) || {};
+            // For demo, use productName+size as key
+            const cartKey = productName + '-' + size;
+            cart[cartKey] = (cart[cartKey] || 0) + 1;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Item added to cart!');
+        });
+    </script>
+    <script src="js/product.js"></script>
+</body>
+</html>

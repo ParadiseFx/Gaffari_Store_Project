@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout | Gaffari Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --light-bg: #f9f9f9;
+      --light-card: #ffffff;
+      --light-text: #212529;
+      --light-border: #ced4da;
+      --light-btn: #343a40;
+      --light-btn-hover: #212529;
+
+      --dark-bg: #121212;
+      --dark-card: #1e1e1e;
+      --dark-text: #f1f1f1;
+      --dark-border: #444;
+      --dark-btn: #f1f1f1;
+      --dark-btn-hover: #fff;
+
+      --radius: 8px;
+    }
+
+    [data-theme="light"] {
+      --bg: var(--light-bg);
+      --card: var(--light-card);
+      --text: var(--light-text);
+      --border: var(--light-border);
+      --btn-bg: var(--light-btn);
+      --btn-hover: var(--light-btn-hover);
+      --btn-text: #fff;
+    }
+
+    [data-theme="dark"] {
+      --bg: var(--dark-bg);
+      --card: var(--dark-card);
+      --text: var(--dark-text);
+      --border: var(--dark-border);
+      --btn-bg: var(--dark-btn);
+      --btn-hover: var(--dark-btn-hover);
+      --btn-text: #000;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header.header {
+      background-color: var(--card);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .brand-logo img {
+      height: 40px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #888;
+    }
+
+    main {
+      padding: 3rem 1rem;
+    }
+
+    .checkout-section {
+      max-width: 600px;
+      margin: auto;
+      background-color: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .checkout-section h1 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .checkout-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background-color: transparent;
+      color: var(--text);
+    }
+
+    input:focus {
+      border-color: var(--btn-bg);
+      outline: none;
+    }
+
+    .cta-btn {
+      margin-top: 1rem;
+      padding: 0.9rem;
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .cta-btn:hover {
+      background-color: var(--btn-hover);
+    }
+
+    #checkout-feedback {
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: 500;
+      color: green;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 2rem 1rem;
+      background-color: var(--card);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-slogan {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="brand-logo">
+        <img src="assets/images/logo4.jpeg" alt="Gaffari Logo">
+        <span>Gaffari</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="shop.html" class="nav-link">Shop</a></li>
+        <li><a href="wishlist.html" class="nav-link">Wishlist</a></li>
+        <li><a href="cart.html" class="nav-link">Cart</a></li>
+        <li><a href="profile.html" class="nav-link">Profile</a></li>
+        <li><a href="orders.html" class="nav-link">My Orders</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="checkout-section">
+      <h1>Checkout</h1>
+      <form id="checkout-form" class="checkout-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" name="name" id="name" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" name="email" id="email" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="address">Shipping Address</label>
+          <input type="text" name="address" id="address" required autocomplete="street-address">
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" name="city" id="city" required>
+        </div>
+        <div class="form-group">
+          <label for="postal">Postal Code</label>
+          <input type="text" name="postal" id="postal" required>
+        </div>
+        <button type="submit" class="cta-btn">Proceed to Payment</button>
+      </form>
+      <div id="checkout-feedback"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <span>&copy; 2025 Gaffari Group. All rights reserved.</span>
+      <span class="footer-slogan">Empowering Your Style.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Theme handling
+    const savedTheme = localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Checkout form handling
+    document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const feedback = document.getElementById('checkout-feedback');
+      feedback.textContent = '';
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const city = document.getElementById('city').value.trim();
+      const postal = document.getElementById('postal').value.trim();
+
+      if (!name || !email || !address || !city || !postal) {
+        feedback.style.color = 'red';
+        feedback.textContent = 'Please fill in all fields.';
+        return;
+      }
+
+      // Optionally, validate email format and postal code here
+
+      // Example: Send order to backend (replace URL as needed)
+      try {
+        const cart = JSON.parse(localStorage.getItem('cart') || '{}');
+        if (Object.keys(cart).length === 0) {
+          feedback.style.color = 'red';
+          feedback.textContent = 'Your cart is empty.';
+          return;
+        }
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + (localStorage.getItem('jwt') || '')
+          },
+          body: JSON.stringify({
+            name, email, address, city, postal, cart
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          feedback.style.color = 'red';
+          feedback.textContent = data.msg || 'Checkout failed. Please try again.';
+          return;
+        }
+        // On success, clear cart and redirect to success page
+        localStorage.removeItem('cart');
+        window.location.href = 'success.html';
+      } catch (err) {
+        feedback.style.color = 'red';
+        feedback.textContent = 'Network error. Please try again.';
+      }
+    });
+  </script>
+  <script src="js/theme-switcher.js"></script>
+</body>
+</html>
